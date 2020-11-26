@@ -29,9 +29,14 @@ class App extends Component {
   };
 
   addMeeting = (meeting) => {
-    this.setState({
-      meetings: this.state.meetings.concat(meeting),
-    });
+    axios
+      .post("http://localhost:4567/api/meetings", meeting)
+      .then((response) =>
+        this.setState({
+          meetings: this.state.meetings.concat(response.data.data),
+        })
+      )
+      .catch((err) => console.log(err));
   };
 
   render() {
