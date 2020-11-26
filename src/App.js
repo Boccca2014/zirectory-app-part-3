@@ -1,7 +1,7 @@
 import { Component } from "react";
 import ListMeetings from "./ListMeetings.js";
 import { Route, Switch } from "react-router";
-import axios from "axios";
+import * as ZirectoryApi from "./ZirectoryApi.js";
 import CreateMeeting from "./CreateMeeting.js";
 
 class App extends Component {
@@ -10,10 +10,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:4567/api/meetings")
-      .then((response) => this.setState({ meetings: response.data.data }))
-      .catch((err) => console.log(err));
+    ZirectoryApi.getAll().then((meetings) => this.setState({ meetings }));
   }
 
   removeMeeting = (meeting) => {
@@ -23,20 +20,15 @@ class App extends Component {
       };
     });
 
-    axios
-      .delete(`http://localhost:4567/api/meetings/${meeting._id}`)
-      .catch((err) => console.log(err));
+    ZirectoryApi.remove(meeting._id);
   };
 
   addMeeting = (meeting) => {
-    axios
-      .post("http://localhost:4567/api/meetings", meeting)
-      .then((response) =>
-        this.setState({
-          meetings: this.state.meetings.concat(response.data.data),
-        })
-      )
-      .catch((err) => console.log(err));
+    ZirectoryApi.add(meeting).then((m) =>
+      this.setState({
+        meetings: this.state.meetings.concat(m),
+      })
+    );
   };
 
   render() {
