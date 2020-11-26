@@ -22,6 +22,10 @@ class App extends Component {
         meetings: state.meetings.filter((m) => m._id !== meeting._id),
       };
     });
+
+    axios
+      .delete(`http://localhost:4567/api/meetings/${meeting._id}`)
+      .catch((err) => console.log(err));
   };
 
   addMeeting = (meeting) => {
