@@ -1,0 +1,29 @@
+.list-meetings {
+  padding-top: 60px;
+}
+
+.list-meetings-top {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  border-bottom: 1px solid #d5d8df;
+  display: flex;
+}
+
+.meeting-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.add-meeting {
+  display: block;
+  width: 73px;
+  background: white;
+  background-image: url("./icons/add.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  font-size: 0;
+}
